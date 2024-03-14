@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 // import Button from "./Button";
-// import L from './Loading';
-// import InfiniteScroll from "react-infinite-scroll-component";
+import L from './Loading';
+import InfiniteScroll from "react-infinite-scroll-component";
 import r1 from './Pictures/PoxLPX9DzF.gif'
 import r2 from './Pictures/Screenshot.png'
 export class AllNews extends Component {
@@ -44,19 +44,22 @@ export class AllNews extends Component {
     return str.charAt(0).toUpperCase()+str.slice(1);
   }
 
-  // fetchMoreData=async()=>{
-  //   console.log(this.props.category+" From fetchMoreData");
-  //   this.setState({i : this.state.i+1})
-  //   document.title="News-"+this.capitalizer(this.props.category);
-  //   let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
-  //   let data = await fetch(url);
-  //   let parsedData = await data.json();
-  //   setTimeout(async()=>{
-  //     this.setState({ articles: this.state.articles.concat(parsedData.articles)})
-  //   },2000)
-  // }
+  fetchMoreData=async()=>{
+    console.log(this.props.category+" From fetchMoreData");
+    this.setState({i : (this.state.i)+1})
+    document.title="News-"+this.capitalizer(this.props.category);
+    let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    setTimeout(async()=>{
+      this.setState({ articles: this.state.articles.concat(parsedData.articles)})
+    },1000)
+  }
   
+
+
   render() {
+
     const refresh=()=>{
       console.log("Refresh clicked")
       setTimeout(()=>{
@@ -70,15 +73,15 @@ export class AllNews extends Component {
     return (
       <div className="container"  >
         <h1 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h1>
-        {/* <InfiniteScroll
-    dataLength={this.state.articles.length}
-    next={this.fetchMoreData}
-    // style={{ display: 'flex', flexDirection: 'column-reverse' }} 
-    // inverse={true} 
-    hasMore={this.state.articles.length !== this.state.totalNo}
-    loader={<L/>}
-    scrollableTarget="scrollableDiv"
-    > */}
+        <InfiniteScroll
+          dataLength={this.state.articles.length}
+          next={this.fetchMoreData}
+          hasMore={this.state.articles.length !== this.state.totalNo}
+          style={{ display: 'flex', flexDirection: 'column-reverse' }} 
+          // inverse={true} 
+          loader={<L/> && console.log(this.state.articles.length !== this.state.totalNo)}
+          scrollableTarget="scrollableDiv"
+        >
     {!this.state.networkStatus && <div className='container my-3'>
           <h2 style={{color : 'red',textAlign : 'center',margin : '30px 0px 10px 0px'}}>Failed to fetch news</h2>
           <h4 style={{color : 'blue',textAlign : 'center',margin : '5px 0px 10px 0px'}}>Make sure you are connected to a wifi or mobile network</h4>
@@ -102,7 +105,7 @@ export class AllNews extends Component {
             );
           })}
         </div>
-        {/* </InfiniteScroll> */}
+        </InfiniteScroll>
       </div>
     );
   }}
