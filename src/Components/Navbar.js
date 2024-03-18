@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Link } from 'react-router-dom'
 
 export class Navbar extends Component {
+
+  
   render() {
     let {title}=this.props
     return (
@@ -24,13 +26,13 @@ export class Navbar extends Component {
             News Category
           </Link>
           <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" /* key='technology' */ category='technology' to='/technology' >Technology</Link></li>
-            <li><Link className="dropdown-item" /* key='science' */ category='science' to='/science' >Science</Link></li>
-            <li><Link className="dropdown-item" /* key='entertainment' */ category='entertainment' to='/entertainment'>Entertainment</Link></li>
-            <li><Link className="dropdown-item" /* key='general' */ category='general' to='/general'>General</Link></li>
-            <li><Link className="dropdown-item" /* key='sports' */ category='sports' to='/sports'>Sports</Link></li>
-            <li><Link className="dropdown-item" /* key='business' */ category='business' to='/business'>Business</Link></li>
-            <li><Link className="dropdown-item" /* key='health' */ category='health' to='/health'>Health</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='technology' */ category='technology' to='/technology' >Technology</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='science' */ category='science' to='/science' >Science</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='entertainment' */ category='entertainment' to='/entertainment'>Entertainment</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='general' */ category='general' to='/general'>General</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='sports' */ category='sports' to='/sports'>Sports</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='business' */ category='business' to='/business'>Business</Link></li>
+            <li><Link className="dropdown-item" onClick={this.componentDidMount} /* key='health' */ category='health' to='/health'>Health</Link></li>
             <li><hr className="dropdown-divider"/></li>
             <li><Link className="dropdown-item" /* key='sources' */ category='sources' to='/sources'>Sources</Link></li>
           </ul>

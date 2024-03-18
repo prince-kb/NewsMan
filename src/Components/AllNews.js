@@ -20,7 +20,6 @@ export class AllNews extends Component {
   }
 
     async componentDidMount() {
-      console.log(this.props.category+" From componentDidMount")
       // this.setState({networkStatus: false});
       let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
       setTimeout(()=>{
@@ -35,7 +34,6 @@ export class AllNews extends Component {
         });
         })
         .catch(e =>{
-          console.log("My error "+e+"?????????????????????????????");
           this.setState({networkStatus: false});
         })
       },500)
@@ -55,6 +53,26 @@ export class AllNews extends Component {
       this.setState({ articles: this.state.articles.concat(parsedData.articles)})
     },1000)
   }
+  refr=async()=>{
+    document.title="News-"+this.capitalizer(this.props.category);
+
+    let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
+      setTimeout(()=>{
+        fetch(url)
+        .then(async()=>{
+          let data = await fetch(url)
+          console.log(data);
+          let parsedData = await data.json();
+          // console.log(parsedData);
+          this.setState({ articles: parsedData.articles ,
+          totalNo : parsedData.totalResults, 
+        });
+        })
+        .catch(e =>{
+          this.setState({networkStatus: false});
+        })
+      },500)
+  }
   
 
 
@@ -72,7 +90,10 @@ export class AllNews extends Component {
     }
     return (
       <div className="container"  >
-        <h1 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h1>
+          <div className="container d-flex justify-content-center align-items-center">
+          <h1 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h1>
+          <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "2vh"}} onClick={this.refr}>REFRESH</button>
+          </div>
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
