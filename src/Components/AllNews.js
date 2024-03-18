@@ -40,9 +40,10 @@ export class AllNews extends Component {
   }
 
   fetchMoreData=async()=>{
-    this.setState({i : (this.state.i)+1})
+    let ii=this.state.i;
+    this.setState({i : ii+1})
     document.title="News-"+this.capitalizer(this.props.category);
-    let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
+    let url =this.state.u1 +`&category=${this.props.category}&page=${(this.state.i)+1}&pageSize=${this.state.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     setTimeout(async()=>{
@@ -84,6 +85,7 @@ export class AllNews extends Component {
     const imgProvider=(r2)=>{
       return r2;
     }
+    let leng=0;
     return (
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
@@ -91,7 +93,7 @@ export class AllNews extends Component {
           <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "2vh"}} onClick={this.refr}>REFRESH</button>
           </div>
         <InfiniteScroll
-          dataLength={this.state.articles.length}
+          dataLength={this.state.articles.length ? this.state.articles.length : leng}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length !== this.state.totalNo}
           style={{ display: 'flex', flexDirection: 'column-reverse' }} 
