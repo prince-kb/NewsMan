@@ -8,7 +8,33 @@ export class AllNews extends Component {
     super()
     this.state = {
       u1: `https://newsapi.org/v2/top-headlines?country=in&apiKey=2e0ff21b7cda4cc3b194045a79b96df1`,
-      articles: [],
+      articles: [
+        {
+        "source": {
+        "id": null,
+        "name": "India TV News"
+        },
+        "author": "Saumya Nigam",
+        "title": "Vijay Sales 'Apple Days Sale' goes live: Offers on iPhone 15, iPads and more - India TV News",
+        "description": "Vijay Sales is offering special deals on higher storage variants of the iPhone 15 Pro and iPhone 15 Pro Max. The iPhone 15 series starts at Rs 66,490, inclusive of an instant discount of Rs 4000 for HDFC Bank cardholders.",
+        "url": "https://www.indiatvnews.com/technology/news/vijay-sales-apple-days-sale-goes-live-offers-on-iphone-15-ipads-and-more-2024-03-17-921930",
+        "urlToImage": "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/03/vijay-sales-2-1710671502.jpg",
+        "publishedAt": "2024-03-17T11:53:15Z",
+        "content": "Vijay Sales, an Indian electronics retail brand has officially announced the Apple Days Sale, which will be offering exciting deals on a wide range of Apple products. The sale will kickstart on March… [+1843 chars]"
+        },
+        {
+        "source": {
+        "id": null,
+        "name": "WION"
+        },
+        "author": null,
+        "title": "Scientists harness food by-products to fight antimicrobial resistance - WION",
+        "description": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\n\nLed by the University of Strathclyde in collaboration with the University of Surrey and GSK, the researc…",
+        "url": "https://www.wionews.com/science/scientists-harness-food-by-products-to-fight-antimicrobial-resistance-701123",
+        "urlToImage": "https://cdn.wionews.com/sites/default/files/2023/01/03/322980-wion-images-15.png",
+        "publishedAt": "2024-03-17T11:49:36Z",
+        "content": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\r\nLed by the University of Strathclyde in coll… [+2227 chars]"
+        },],
       totalNo : 0,
       i: 1,
       pageSize: 8,
