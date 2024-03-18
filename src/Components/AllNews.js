@@ -3,38 +3,39 @@ import NewsItem from "./NewsItem";
 import InfiniteScroll from "react-infinite-scroll-component";
 import r1 from './Pictures/PoxLPX9DzF.gif'
 import r2 from './Pictures/Screenshot.png'
+// import L from './Loading'
 export class AllNews extends Component {
   constructor() {
     super()
     this.state = {
       u1: `https://newsapi.org/v2/top-headlines?country=in&apiKey=2e0ff21b7cda4cc3b194045a79b96df1`,
       articles: [
-        {
-        "source": {
-        "id": null,
-        "name": "India TV News"
-        },
-        "author": "Saumya Nigam",
-        "title": "Vijay Sales 'Apple Days Sale' goes live: Offers on iPhone 15, iPads and more - India TV News",
-        "description": "Vijay Sales is offering special deals on higher storage variants of the iPhone 15 Pro and iPhone 15 Pro Max. The iPhone 15 series starts at Rs 66,490, inclusive of an instant discount of Rs 4000 for HDFC Bank cardholders.",
-        "url": "https://www.indiatvnews.com/technology/news/vijay-sales-apple-days-sale-goes-live-offers-on-iphone-15-ipads-and-more-2024-03-17-921930",
-        "urlToImage": "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/03/vijay-sales-2-1710671502.jpg",
-        "publishedAt": "2024-03-17T11:53:15Z",
-        "content": "Vijay Sales, an Indian electronics retail brand has officially announced the Apple Days Sale, which will be offering exciting deals on a wide range of Apple products. The sale will kickstart on March… [+1843 chars]"
-        },
-        {
-        "source": {
-        "id": null,
-        "name": "WION"
-        },
-        "author": null,
-        "title": "Scientists harness food by-products to fight antimicrobial resistance - WION",
-        "description": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\n\nLed by the University of Strathclyde in collaboration with the University of Surrey and GSK, the researc…",
-        "url": "https://www.wionews.com/science/scientists-harness-food-by-products-to-fight-antimicrobial-resistance-701123",
-        "urlToImage": "https://cdn.wionews.com/sites/default/files/2023/01/03/322980-wion-images-15.png",
-        "publishedAt": "2024-03-17T11:49:36Z",
-        "content": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\r\nLed by the University of Strathclyde in coll… [+2227 chars]"
-        },],
+{
+"source": {
+"id": null,
+"name": "India TV News"
+},
+"author": "Saumya Nigam",
+"title": "Vijay Sales 'Apple Days Sale' goes live: Offers on iPhone 15, iPads and more - India TV News",
+"description": "Vijay Sales is offering special deals on higher storage variants of the iPhone 15 Pro and iPhone 15 Pro Max. The iPhone 15 series starts at Rs 66,490, inclusive of an instant discount of Rs 4000 for HDFC Bank cardholders.",
+"url": "https://www.indiatvnews.com/technology/news/vijay-sales-apple-days-sale-goes-live-offers-on-iphone-15-ipads-and-more-2024-03-17-921930",
+"urlToImage": "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/03/vijay-sales-2-1710671502.jpg",
+"publishedAt": "2024-03-17T11:53:15Z",
+"content": "Vijay Sales, an Indian electronics retail brand has officially announced the Apple Days Sale, which will be offering exciting deals on a wide range of Apple products. The sale will kickstart on March… [+1843 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "WION"
+},
+"author": null,
+"title": "Scientists harness food by-products to fight antimicrobial resistance - WION",
+"description": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\n\nLed by the University of Strathclyde in collaboration with the University of Surrey and GSK, the researc…",
+"url": "https://www.wionews.com/science/scientists-harness-food-by-products-to-fight-antimicrobial-resistance-701123",
+"urlToImage": "https://cdn.wionews.com/sites/default/files/2023/01/03/322980-wion-images-15.png",
+"publishedAt": "2024-03-17T11:49:36Z",
+"content": "Scientists are embarking on a £1.1 million project aimed at revolutionising drug production by using food by-products to develop new antimicrobial drugs.\r\nLed by the University of Strathclyde in coll… [+2227 chars]"
+},],
       totalNo : 0,
       i: 1,
       pageSize: 8,
@@ -49,7 +50,6 @@ export class AllNews extends Component {
         fetch(url)
         .then(async()=>{
           let data = await fetch(url)
-          console.log(data);
           let parsedData = await data.json();
           // console.log(parsedData);
           this.setState({ articles: parsedData.articles ,
@@ -85,7 +85,6 @@ export class AllNews extends Component {
         .then(async()=>{
           let data = await fetch(url)
           let parsedData = await data.json();
-          console.log("p==================",parsedData.articles)
           // console.log(parsedData);
           this.setState({ articles: parsedData.articles ,
           totalNo : parsedData.totalResults, 
@@ -97,7 +96,7 @@ export class AllNews extends Component {
       },500)
   }
   
-
+  leng = 10;
 
   render() {
 
@@ -111,7 +110,6 @@ export class AllNews extends Component {
     const imgProvider=(r2)=>{
       return r2;
     }
-    let leng=0;
     return (
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
@@ -119,12 +117,12 @@ export class AllNews extends Component {
           <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "2vh"}} onClick={this.refr}>REFRESH</button>
           </div>
         <InfiniteScroll
-          dataLength={this.state.totalNo}
+          dataLength={this.state.articles.length}
           next={this.fetchMoreData}
-          hasMore={true}
+          hasMore={this.state.articles.length !== this.state.totalNo}
           style={{ display: 'flex', flexDirection: 'column-reverse' }} 
           // inverse={true} 
-          // loader={<L/> && console.log(this.state.articles.length !== this.state.totalNo)}
+          // loader={<h1>LOADING </h1>}
           scrollableTarget="scrollableDiv"
         >
     {!this.state.networkStatus && <div className='container my-3'>
@@ -134,7 +132,7 @@ export class AllNews extends Component {
           </div>}
 
         <div className="container row">
-          {this.state.articles.map((e) => {
+          {this.state.articles.length != 0 && this.state.articles.map((e) => {
             return (
               <div className="col-md-3" key={e.title}>
                 <NewsItem
