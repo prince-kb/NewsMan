@@ -39,7 +39,7 @@ export class AllNews extends Component {
       totalNo : 0,
       i: 1,
       pageSize: 8,
-      networkStatus : true,
+      networkStatus : false,
 
     };
   }
@@ -54,6 +54,7 @@ export class AllNews extends Component {
           // console.log(parsedData);
           this.setState({ articles: parsedData.articles ,
           totalNo : parsedData.totalResults, 
+          networkStatus : true
         });
         })
         .catch(e =>{
