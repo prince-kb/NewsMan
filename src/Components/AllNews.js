@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
-// import Button from "./Button";
-import L from './Loading';
 import InfiniteScroll from "react-infinite-scroll-component";
 import r1 from './Pictures/PoxLPX9DzF.gif'
 import r2 from './Pictures/Screenshot.png'
@@ -20,7 +18,6 @@ export class AllNews extends Component {
   }
 
     async componentDidMount() {
-      // this.setState({networkStatus: false});
       let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
       setTimeout(()=>{
         fetch(url)
@@ -43,7 +40,6 @@ export class AllNews extends Component {
   }
 
   fetchMoreData=async()=>{
-    console.log(this.props.category+" From fetchMoreData");
     this.setState({i : (this.state.i)+1})
     document.title="News-"+this.capitalizer(this.props.category);
     let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
@@ -61,8 +57,8 @@ export class AllNews extends Component {
         fetch(url)
         .then(async()=>{
           let data = await fetch(url)
-          console.log(data);
           let parsedData = await data.json();
+          console.log("p==================",parsedData.articles)
           // console.log(parsedData);
           this.setState({ articles: parsedData.articles ,
           totalNo : parsedData.totalResults, 
@@ -100,7 +96,7 @@ export class AllNews extends Component {
           hasMore={this.state.articles.length !== this.state.totalNo}
           style={{ display: 'flex', flexDirection: 'column-reverse' }} 
           // inverse={true} 
-          loader={<L/> && console.log(this.state.articles.length !== this.state.totalNo)}
+          // loader={<L/> && console.log(this.state.articles.length !== this.state.totalNo)}
           scrollableTarget="scrollableDiv"
         >
     {!this.state.networkStatus && <div className='container my-3'>
