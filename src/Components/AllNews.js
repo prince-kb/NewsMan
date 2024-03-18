@@ -132,7 +132,7 @@ export class AllNews extends Component {
           </div>}
 
         <div className="container row">
-          {this.state.articles.length !== 0 && this.state.articles.map((e) => {
+          {this.state.networkStatus && this.state.articles.map((e) => {
             return (
               <div className="col-md-3" key={e.title}>
                 <NewsItem
