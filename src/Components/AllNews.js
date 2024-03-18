@@ -119,7 +119,7 @@ export class AllNews extends Component {
           <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "2vh"}} onClick={this.refr}>REFRESH</button>
           </div>
         <InfiniteScroll
-          dataLength={this.totalNo}
+          dataLength={this.state.totalNo}
           next={this.fetchMoreData}
           hasMore={true}
           style={{ display: 'flex', flexDirection: 'column-reverse' }} 
