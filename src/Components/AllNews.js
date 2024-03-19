@@ -8,7 +8,7 @@ export class AllNews extends Component {
   constructor() {
     super()
     this.state = {
-      u1: `http://newsapi.org/v2/top-headlines?country=in&apiKey=2e0ff21b7cda4cc3b194045a79b96df1`,
+      u1: `https://newsapi.org/v2/top-headlines?country=in&apiKey=2e0ff21b7cda4cc3b194045a79b96df1`,
       articles: [],
       totalNo : 0,
       i: 1,
