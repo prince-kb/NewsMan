@@ -353,8 +353,7 @@ export class AllNews extends Component {
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
           <h1 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h1>
-          <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh",fontSize : "2vh"}} onClick={this.refr}>REFRESH</button>
-          <div className="form-check form-switch d-flex justify-content-center align-items-center">
+          {!this.state.deployed && <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh",fontSize : "2vh"}} onClick={this.refr}>REFRESH</button>}          <div className="form-check form-switch d-flex justify-content-center align-items-center">
             <input style={{marginRight : "2vh" ,marginLeft: "2vh",transform : "scale(2)"}} className="form-check-input " type="checkbox" role="switch" id="ccc" onChange={this.depl}/>
             <label style={{marginLeft: "1vh",fontSize : "3vh"}} className="form-check-label" htmlFor="ccc">DEPLOYED</label>
           </div>
