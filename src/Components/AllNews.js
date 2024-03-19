@@ -3,7 +3,6 @@ import NewsItem from "./NewsItem";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import L from './Loading'
 import r1 from './Pictures/PoxLPX9DzF.gif'
-import r2 from './Pictures/Screenshot.png'
 export class AllNews extends Component {
   constructor() {
     super()
@@ -126,16 +125,16 @@ export class AllNews extends Component {
 
   render() {
 
-    const refresh=()=>{
-      console.log("Refresh clicked")
-      setTimeout(()=>{
-        this.componentDidMount();
-      },300)
-      imgProvider(r1);
-    }
-    const imgProvider=(r2)=>{
-      return r2;
-    }
+    // const refresh=()=>{
+    //   console.log("Refresh clicked")
+    //   setTimeout(()=>{
+    //     this.componentDidMount();
+    //   },300)
+    //   imgProvider(r1);
+    // }
+    // const imgProvider=(r2)=>{
+    //   return r2;
+    // }
     return (
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
@@ -154,7 +153,7 @@ export class AllNews extends Component {
     {!this.state.networkStatus && <div className='container my-3'>
           <h2 style={{color : 'red',textAlign : 'center',margin : '30px 0px 10px 0px'}}>Failed to fetch news</h2>
           <h4 style={{color : 'blue',textAlign : 'center',margin : '5px 0px 10px 0px'}}>Make sure you are connected to a wifi or mobile network</h4>
-          <img src={imgProvider(r2)} alt="Unavialable" onClick={refresh}/>
+          <img src={r1} alt="Unavialable"/>
           </div>}
 
         <div className="container row">
