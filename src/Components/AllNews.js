@@ -280,7 +280,7 @@ export class AllNews extends Component {
 
     async componentDidMount() {
       if(this.state.deployed===false){
-      let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'sports'}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
+      let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'sports'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       setTimeout(()=>{
         fetch(url)
         .then(async()=>{
@@ -303,7 +303,7 @@ export class AllNews extends Component {
 
   fetchMoreData=async()=>{
     this.setState({i : (this.state.i)+1})
-    let url = this.state.u1 +`&category=${this.props.category}&page=${this.state.i + 1}&pageSize=${this.state.pageSize}`;
+    let url = this.state.u1 +`&category=${this.props.category}&page=${this.state.i + 1}&pageSize=${this.state.pageSize}/`;
     let data = await fetch(url);
     let parsedData = await data.json();
     setTimeout(async()=>{
@@ -313,7 +313,7 @@ export class AllNews extends Component {
   }
   refr=async()=>{
     if(this.state.deployed === false){
-    let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}`;
+    let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
     setTimeout(()=>{
       fetch(url)
         .then(async()=>{
@@ -333,7 +333,7 @@ export class AllNews extends Component {
   }
 
   depl=()=>{
-    console.log(this.state.deployed)
+    // console.log(this.state.deployed)
     this.state.deployed ? this.setState({deployed : false}) : this.setState({deployed : true})
   }
 
@@ -352,10 +352,10 @@ export class AllNews extends Component {
     return (
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
-          <h1 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h1>
-          {!this.state.deployed && <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh",fontSize : "2vh"}} onClick={this.refr}>REFRESH</button>}          <div className="form-check form-switch d-flex justify-content-center align-items-center">
+          <h3 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h3>
+          {!this.state.deployed && <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh"}} onClick={this.refr}>REFRESH</button>}          <div className="form-check form-switch d-flex justify-content-center align-items-center">
             <input style={{marginRight : "2vh" ,marginLeft: "2vh",transform : "scale(2)"}} className="form-check-input " type="checkbox" role="switch" id="ccc" onChange={this.depl}/>
-            <label style={{marginLeft: "1vh",fontSize : "3vh"}} className="form-check-label" htmlFor="ccc">DEPLOYED</label>
+            <label style={{marginLeft: "0.5vh",fontSize : "2vh"}} className="form-check-label" htmlFor="ccc">DEPLOYED</label>
           </div>
           </div>
         {
