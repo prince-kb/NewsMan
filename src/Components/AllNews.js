@@ -14,13 +14,14 @@ export class AllNews extends Component {
       i: 1,
       pageSize: 8,
       networkStatus : true,
-      deployed : true
+      deployed : true,
+      category : 'general'
     };
   }
 
     async componentDidMount() {
       if(this.state.deployed===false){
-      let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'sports'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
+      let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       setTimeout(()=>{
         fetch(url)
         .then(async()=>{
@@ -58,7 +59,7 @@ export class AllNews extends Component {
   refr=async()=>{
     if(this.state.deployed === false){
       this.x=true;
-    let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
+    let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
     setTimeout(()=>{
       fetch(url)
         .then(async()=>{
@@ -92,7 +93,8 @@ export class AllNews extends Component {
       <div className="container"  >
           <div className="container d-flex justify-content-center align-items-center">
           <h3 className="text-center my-3">Trending News : {this.capitalizer(this.props.category)}</h3>
-          {!this.state.deployed && <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh"}} onClick={this.refr}>REFRESH</button>}          <div className="form-check form-switch d-flex justify-content-center align-items-center">
+          {/* {!this.state.deployed && <button style={{marginRight : "2vh" ,marginLeft: "2vh",borderRadius: "12vh",padding : "1vh"}} onClick={this.refr}>REFRESH</button>}           */}
+          <div className="form-check form-switch d-flex justify-content-center align-items-center">
             <input style={{marginRight : "2vh" ,marginLeft: "2vh",transform : "scale(2)"}} className="form-check-input " type="checkbox" role="switch" id="ccc" onChange={this.depl}/>
             <label style={{marginLeft: "0.5vh",fontSize : "2vh"}} className="form-check-label" htmlFor="ccc">DEPLOYED</label>
           </div>

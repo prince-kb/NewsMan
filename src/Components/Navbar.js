@@ -6,6 +6,9 @@ export class Navbar extends Component {
   
   render() {
     let {title,refr}=this.props
+    const refreshh=()=>{
+      refr();
+    }
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary ">
   <div className="container-fluid">
@@ -26,13 +29,13 @@ export class Navbar extends Component {
             News Category
           </Link>
           <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='technology' */ category='technology' to='/technology' >Technology</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='science' */ category='science' to='/science' >Science</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='entertainment' */ category='entertainment' to='/entertainment'>Entertainment</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='general' */ category='general' to='/general'>General</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='sports' */ category='sports' to='/sports'>Sports</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='business' */ category='business' to='/business'>Business</Link></li>
-            <li><Link className="dropdown-item" onClick={()=>{refr()}} /* key='health' */ category='health' to='/health'>Health</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='technology' */ category='technology' to='/technology' >Technology</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='science' */ category='science' to='/science' >Science</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='entertainment' */ category='entertainment' to='/entertainment'>Entertainment</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='general' */ category='general' to='/general'>General</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='sports' */ category='sports' to='/sports'>Sports</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='business' */ category='business' to='/business'>Business</Link></li>
+            <li><Link className="dropdown-item" onClick={refreshh} /* key='health' */ category='health' to='/health'>Health</Link></li>
             <li><hr className="dropdown-divider"/></li>
             <li><Link className="dropdown-item" /* key='sources' */ category='sources' to='/sources'>Sources</Link></li>
           </ul>
