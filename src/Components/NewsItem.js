@@ -3,7 +3,6 @@ import React, { Component } from "react";
 export class NewsItem extends Component {
   render() {
     let { title, desc, imgurl, url, date, author, source } = this.props;
-    if(author==="Neha Yadav") console.log(imgurl)
 
     return (
       <div className="container my-2 position-relative">

@@ -1,11 +1,9 @@
 import AllNews from "./Components/AllNews";
-import Navbar from "./Components/Navbar";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
     <>
-    <Navbar title={"News App"}/>
     <Routes>
     <Route exact path="/"  element={<AllNews country='in' category='general'/>}/>
     <Route exact path="/sources" key='sources' element={<AllNews country='in' category='sources'/>}/>
