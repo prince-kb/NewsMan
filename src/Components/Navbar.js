@@ -7,7 +7,10 @@ export class Navbar extends Component {
   render() {
     let {title,refr}=this.props
     const refreshh=()=>{
-      refr();
+      this.setState({i : 1});
+      setTimeout(()=>{
+        refr(1);
+      },200)
     }
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary ">

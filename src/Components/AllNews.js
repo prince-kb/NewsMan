@@ -36,7 +36,7 @@ export class AllNews extends Component {
           this.setState({networkStatus: false});
         })
       },200)
-      this.refr();
+      this.refr(0);
     }
   }
   capitalizer=(str)=>{
@@ -56,9 +56,11 @@ export class AllNews extends Component {
     },200)
     document.title="News-"+this.capitalizer(this.props.category);
   }
-  refr=async()=>{
+  refr=async(n)=>{
     if(!this.state.deployed){
       this.x=true;
+      if(n===1) this.setState({i : 1});
+      console.log(n);
       setTimeout(()=>{
       let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       fetch(url)
@@ -83,7 +85,7 @@ export class AllNews extends Component {
     this.state.deployed ? this.setState({deployed : false}) : this.setState({deployed : true})
     this.x=true;
     setTimeout(()=>{
-    if(!this.state.deployed) this.refr();
+    if(!this.state.deployed) this.refr(0);
     this.x=false;
     },300)
   }
