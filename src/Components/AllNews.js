@@ -8,12 +8,12 @@ export class AllNews extends Component {
   constructor() {
     super()
     this.state = {
-      u1: `https://newsapi.org/v2/top-headlines?country=in&apiKey=2e0ff21b7cda4cc3b194045a79b96df1`,
+      u1: `https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.REACT_APP_KEY}`,
       articles: nn,
       totalNo : 0,
       i: 1,
       pageSize: 8,
-      networkStatus : true,
+      networkStatus : false,
       deployed : true,
       category : 'general'
     };
@@ -27,13 +27,18 @@ export class AllNews extends Component {
         .then(async()=>{
           let data = await fetch(url)
           let parsedData = await data.json();
+          if(parsedData.status!=='error'){
           // console.log(parsedData);
           this.setState({ articles: parsedData.articles ,
           totalNo : parsedData.totalResults, 
         });
+      }else{
+        this.setState({articles : nn})
+        this.setState({networkStatus: true});
+      }
         })
         .catch(e =>{
-          this.setState({networkStatus: false});
+          this.setState({networkStatus: true});
         })
       },200)
       this.refr(0);
@@ -45,36 +50,56 @@ export class AllNews extends Component {
   x=false;
 
   fetchMoreData=async()=>{
+    this.x=true;
     this.setState({i : (this.state.i)+1})
+    try{
     let url = this.state.u1 +`&category=${this.props.category}&page=${this.state.i + 1}&pageSize=${this.state.pageSize}/`;
     let data = await fetch(url);
     let parsedData = await data.json();
+
+    if(parsedData.status!=='error'){
     
     setTimeout(async()=>{
       // console.log(this.articles)
       this.setState({ articles: this.state.articles.concat(parsedData.articles)})
+      this.x=false;
     },200)
     document.title="News-"+this.capitalizer(this.props.category);
+  }else{
+    this.setState({networkStatus: true});
+    this.x=false;
   }
+  }catch(e){
+    this.setState({networkStatus: true});
+  }
+}
+  
   refr=async(n)=>{
     if(!this.state.deployed){
       this.x=true;
       if(n===1) this.setState({i : 1});
-      console.log(n);
+      // console.log(n);
       setTimeout(()=>{
       let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       fetch(url)
         .then(async()=>{
           let data = await fetch(url)
           let parsedData = await data.json();
+
+          if(parsedData.status!=='error'){
           this.setState({ articles: parsedData.articles ,
             totalNo : parsedData.totalResults, 
           });
           document.title="News-"+this.capitalizer(this.props.category);
           this.x=false;
+          }else{
+            this.setState({articles : []})
+            this.setState({networkStatus: true});
+            this.x=false;
+          }
         })
         .catch(e =>{
-          this.setState({networkStatus: false});
+          this.setState({networkStatus: true});
           this.x=false;
         })
       },200)
@@ -82,10 +107,12 @@ export class AllNews extends Component {
   }
 
   depl=()=>{
+    console.log(this.state.u1)
     this.state.deployed ? this.setState({deployed : false}) : this.setState({deployed : true})
     this.x=true;
     setTimeout(()=>{
     if(!this.state.deployed) this.refr(0);
+    else if(this.state.deployed) this.setState({articles : nn})
     this.x=false;
     },300)
   }
@@ -157,7 +184,7 @@ export class AllNews extends Component {
           </div>
 
         }
-        {!this.state.networkStatus && <div className='container my-3'>
+        {this.state.networkStatus && <div className='container my-3'>
           <h2 style={{color : 'red',textAlign : 'center',margin : '30px 0px 10px 0px'}}>Failed to fetch news</h2>
           <h4 style={{color : 'blue',textAlign : 'center',margin : '5px 0px 10px 0px'}}>Make sure you are connected to a wifi or mobile network, or the API limit may have exhausted.</h4>
           </div>}
