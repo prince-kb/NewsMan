@@ -20,7 +20,7 @@ export class AllNews extends Component {
   }
 
     async componentDidMount() {
-      if(this.state.deployed===false){
+      if(!this.state.deployed){
       let url =this.state.u1 +`&category=${this.props.category ? this.props.category : 'general'}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       setTimeout(()=>{
         fetch(url)
@@ -51,16 +51,16 @@ export class AllNews extends Component {
     let parsedData = await data.json();
     
     setTimeout(async()=>{
-      console.log(this.articles)
+      // console.log(this.articles)
       this.setState({ articles: this.state.articles.concat(parsedData.articles)})
     },200)
     document.title="News-"+this.capitalizer(this.props.category);
   }
   refr=async()=>{
-    if(this.state.deployed === false){
+    if(!this.state.deployed){
       this.x=true;
-    let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
-    setTimeout(()=>{
+      setTimeout(()=>{
+      let url =this.state.u1 +`&category=${this.props.category}&page=${this.state.i}&pageSize=${this.state.pageSize}/`;
       fetch(url)
         .then(async()=>{
           let data = await fetch(url)
@@ -80,8 +80,12 @@ export class AllNews extends Component {
   }
 
   depl=()=>{
-    // console.log(this.state.deployed)
     this.state.deployed ? this.setState({deployed : false}) : this.setState({deployed : true})
+    this.x=true;
+    setTimeout(()=>{
+    if(!this.state.deployed) this.refr();
+    this.x=false;
+    },300)
   }
 
   render() {
